@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>calculator</title>
+    <link rel="stylesheet" href="calculator.css" />
+    <script src="calculator.js"></script>
+  </head>
+  <style>
+    body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: rgb(51, 51, 51);
+  }
+#containor{
+    width: 412px;
+    height: fit-content;
+    background: black;
+    border-radius: 40px;
+}
+#screen{
+    height: 230px;
+}
+#output{
+    color: white;
+    text-align: right;
+    height: 200px;
+    width: 405px;
+    border-radius: 40px;
+    background: black;
+    font-size: 60px;
+}
+.fn{
+    width:  100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size:40px;
+    background:#ffffff;
+}
+.fn:hover{
+    background: #b9b9b9;
+}
+.op{
+    width:  100px;
+    height: 100px;
+    background: rgb(255, 158, 48);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 40px;
+}
+.op:hover{
+    background: rgb(255, 177, 88);
+}
+.num{
+    width:  100px;
+    height: 100px;
+    background: rgb(53, 53, 53);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 40px;
+}
+.num:hover{
+    background: rgb(28, 28, 28);
+}
+#zero{
+    width:  200px;
+    height: 100px;
+    border-top-right-radius: 50px;
+    border-top-left-radius:     50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius:  50px;
+    font-size: 40px;
+    background: rgb(53, 53, 53);
+    color: #fff;
+}
+#zero:hover{
+    background: rgb(28, 28, 28);
+}
+/* .bt{
+    width:  100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: 40px;
+} */
+
+  </style>
+  <body>
+    <fieldset id="containor">
+      <div id="screen">
+        <input type="text" id="output" disabled />
+      </div>
+      <div id="buttons">
+        <button class="fn" onclick="clearOutput()">AC</button>
+        <button class="fn" onclick="deleteLast()">Del</button>
+        <button class="fn" onclick="calculatePercentage('')">%</button>
+        <button class="op" onclick="input('/')">÷</button>
+        <button class="num" onclick="input('7')">7</button>
+        <button class="num" onclick="input('8')">8</button>
+        <button class="num" onclick="input('9')">9</button>
+        <button class="op" onclick="input('*')">×</button>
+        <button class="num" onclick="input('4')">4</button>
+        <button class="num" onclick="input('5')">5</button>
+        <button class="num" onclick="input('6')">6</button>
+        <button class="op" onclick="input('-')">-</button>
+        <button class="num" onclick="input('1')">1</button>
+        <button class="num" onclick="input('2')">2</button>
+        <button class="num" onclick="input('3')">3</button>
+        <button class="op" onclick="input('+')">+</button>
+        <button id="zero" onclick="input('0')">0</button>
+        <button class="num" onclick="input('.')">.</button>
+        <button class="op" onclick="calculate()">=</button>
+      </div>
+    </fieldset>
+    <script>
+      function input(value) {
+    document.getElementById("output").value += value;
+  }
+  function clearOutput() {
+    document.getElementById("output").value = "";
+  }
+
+  function calculate() {
+    try {
+      document.getElementById("output").value = eval(document.getElementById("output").value);
+    } catch (error) {
+      document.getElementById("output").value = "Error";
+    }
+  }
+
+  function deleteLast() {
+    var display = document.getElementById('output');
+    var currentValue = display.value;
+  
+    // Check if there is anything to delete
+    if (currentValue.length > 0) {
+      // Remove the last character from the string
+      var newValue = currentValue.slice(0, -1);
+  
+      // Update the display with the new value
+      display.value = newValue;
+    }
+  }
+  
+  function appendToDisplay(value) {
+    var display = document.getElementById('output');
+    display.value += value;
+  }
+  function calculatePercentage() {
+    var display = document.getElementById('output');
+    var currentValue = display.value;
+  
+    try {
+        var result = parseFloat(currentValue) / 100;
+        display.value = result;
+    } catch (error) {
+        display.value = "Error";
+    }
+}
+  
+    </script>
+  </body>
+</html>
